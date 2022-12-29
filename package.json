@@ -1,0 +1,20 @@
+{
+  "name": "task_manager_api",
+  "version": "1.0.0",
+  "description": "simple rest_api project with express and mongodb as database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/safkhan-s/task_manager_api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/safkhan-s/task_manager_api/issues"
+  },
+  "homepage": "https://github.com/safkhan-s/task_manager_api#readme"
+}
