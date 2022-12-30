@@ -1,0 +1,11 @@
+services:
+  mongodb_data:
+    image: mongo:latest
+    env_file:
+      - ./backend/src/env/db.env
+    ports:
+      - 27017:27017
+    volumes:
+      - task_manager_db:/data/db
+volumes:
+  task_manager_db:
