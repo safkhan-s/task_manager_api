@@ -4,6 +4,7 @@ const taskRoutes = require("./routes/tasks");
 const homeRoutes = require("./routes/home");
 
 const app = express();
+app.use(express.json());
 
 app.use("/", homeRoutes);
 app.use("/api/v1/tasks", taskRoutes);

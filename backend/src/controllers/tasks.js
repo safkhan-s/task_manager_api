@@ -1,18 +1,89 @@
-function allTasks(req, res) {
-  res.send("<h1>All tasks</h1>");
+const Task = require("../models/Task");
+
+async function allTasks(req, res) {
+  try {
+    const tasks = await Task.find({});
+    res.status(200).json({ success: true, data: tasks });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      data: error,
+    });
+  }
 }
 
-function createTask(req, res) {
-  res.send("<h1>Create Task</h1>");
+async function createTask(req, res) {
+  try {
+    const task = await Task.create(req.body);
+    res.status(200).json({ success: true, data: task });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      data: { name: error.name, message: error.errors.name.message },
+    });
+  }
 }
-function getTask(req, res) {
-  res.send("<h1>Get Task</h1>");
+
+async function getTask(req, res) {
+  try {
+    const { id: taskId } = req.params;
+    const task = await Task.findOne({ _id: taskId });
+    if (!task) {
+      return res.status(404).json({
+        success: true,
+        data: { msg: `there is no task with id:${taskId}` },
+      });
+    }
+    res.status(200).json({ success: true, data: task });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      data: error,
+    });
+  }
 }
-function updateTask(req, res) {
-  res.send("<h1>Update Task</h1>");
+
+async function updateTask(req, res) {
+  try {
+    const { id: taskId } = req.params;
+    const userReq = req.body;
+    // NOTE: new:returns updated object, runvalidators:runs validators you setup for model at start on updated object
+    const task = await Task.findByIdAndUpdate({ _id: taskId }, userReq, {
+      new: true,
+      runValidators: true,
+    });
+    if (!task) {
+      return res.status(404).json({
+        success: true,
+        data: { msg: `there is no task with id:${taskId}` },
+      });
+    }
+    res.status(200).json({ success: true, data: task });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      data: error,
+    });
+  }
 }
-function deleteTask(req, res) {
-  res.send("<h1>Delete Task</h1>");
+
+async function deleteTask(req, res) {
+  try {
+    const { id: taskId } = req.params;
+    const task = await Task.findByIdAndDelete({ _id: taskId });
+    if (!task) {
+      return res.status(404).json({
+        success: true,
+        data: { msg: `there is no task with id:${taskId}` },
+      });
+    }
+    res.status(200).json({ seccuss: true, task });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      data: error,
+    });
+  }
 }
 
 module.exports = { allTasks, createTask, getTask, updateTask, deleteTask };
