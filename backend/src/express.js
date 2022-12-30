@@ -1,9 +1,11 @@
 const express = require("express");
 
+const taskRoutes = require("./routes/tasks");
+const homeRoutes = require("./routes/home");
+
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("<h1>Home Page</h1>");
-});
+app.use("/", homeRoutes);
+app.use("/api/v1/tasks", taskRoutes);
 
 module.exports = app;
