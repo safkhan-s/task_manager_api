@@ -1,7 +1,7 @@
 # task_manager_api
 
 simple rest_api project with express and mongodb as database<br>
-IMPORTANT:this project build for training begginer level developers you can't use it as deploy it in real world.
+IMPORTANT:this project build for training begginer level developers you can't deploy it in real world.
 
 NOTE:<br>
 -in order to run backend project setup ".env" file.<br>
